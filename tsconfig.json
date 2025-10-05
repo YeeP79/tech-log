@@ -5,6 +5,21 @@
   "references": [
     {
       "path": "./apps/web"
+    },
+    {
+      "path": "./libs/shared-types"
+    },
+    {
+      "path": "./libs/form-schema"
+    },
+    {
+      "path": "./libs/domain"
+    },
+    {
+      "path": "./libs/validation"
+    },
+    {
+      "path": "./apps/functions"
     }
   ]
 }

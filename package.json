@@ -2,23 +2,42 @@
   "name": "@org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "lint": "nx run-many --target=lint --all",
+    "typecheck": "tsc --noEmit",
+    "test": "nx run-many --target=test --all",
+    "build": "nx run-many --target=build --all",
+    "deploy:validate": "tsx scripts/deploy/validate-env.ts",
+    "deploy:pre": "tsx scripts/deploy/pre-deploy.ts",
+    "deploy:post": "tsx scripts/deploy/post-deploy.ts",
+    "deploy:web": "npm run deploy:pre && npx nx build web && firebase deploy --only hosting && npm run deploy:post",
+    "deploy:functions": "npm run deploy:pre && npx nx build functions && firebase deploy --only functions",
+    "deploy:firestore": "npm run deploy:validate && firebase deploy --only firestore",
+    "deploy:all": "npm run deploy:pre && npx nx build web && npx nx build functions && firebase deploy && npm run deploy:post",
+    "emulator": "firebase emulators:start"
+  },
   "private": true,
+  "type": "module",
   "dependencies": {
+    "firebase": "^12.3.0",
+    "firebase-admin": "^13.5.0",
     "next": "~15.2.4",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^2.1.1",
     "@eslint/js": "^9.8.0",
     "@next/eslint-plugin-next": "^15.2.4",
+    "@nx/esbuild": "21.6.3",
     "@nx/eslint": "21.6.3",
     "@nx/eslint-plugin": "21.6.3",
     "@nx/jest": "21.6.3",
     "@nx/js": "21.6.3",
     "@nx/next": "21.6.3",
+    "@nx/node": "^21.6.3",
     "@nx/workspace": "21.6.3",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.6.0",
@@ -32,6 +51,8 @@
     "@types/react-dom": "19.0.0",
     "autoprefixer": "10.4.13",
     "babel-jest": "^30.0.2",
+    "dotenv": "^17.2.3",
+    "esbuild": "^0.19.2",
     "eslint": "^9.8.0",
     "eslint-config-next": "^15.2.4",
     "eslint-config-prettier": "^10.0.0",
@@ -39,6 +60,7 @@
     "eslint-plugin-jsx-a11y": "6.10.1",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.0.0",
+    "firebase-tools": "^14.18.0",
     "jest": "^30.0.2",
     "jest-environment-jsdom": "^30.0.2",
     "jest-util": "^30.0.2",
@@ -49,10 +71,12 @@
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
+    "tsx": "^4.20.6",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/*"
   ]
 }

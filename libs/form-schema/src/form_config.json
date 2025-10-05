@@ -1,0 +1,460 @@
+{
+  "title": "Aircraft Tech Log",
+  "description": "Daily Pre/Post Flight Inspection and Tech Log",
+  "sections": [
+    {
+      "title": "Aircraft and Flight Information",
+      "fields": [
+        {
+          "id": "aircraft_registration",
+          "type": "short_answer",
+          "question": "Aircraft Registration",
+          "required": true,
+          "placeholder": "e.g., N91775"
+        },
+        {
+          "id": "log_number",
+          "type": "short_answer",
+          "question": "Log Number",
+          "required": true,
+          "placeholder": "e.g., 75 #469"
+        },
+        {
+          "id": "date",
+          "type": "date",
+          "question": "Date",
+          "required": true
+        },
+        {
+          "id": "pic",
+          "type": "short_answer",
+          "question": "PIC (Pilot in Command)",
+          "required": true
+        },
+        {
+          "id": "obs_sic",
+          "type": "short_answer",
+          "question": "OBS/SIC",
+          "required": false
+        },
+        {
+          "id": "company",
+          "type": "dropdown",
+          "question": "Company",
+          "required": true,
+          "options": ["A) MIDKIFF", "B)", "C)"],
+          "note": "Options can be controlled via API"
+        },
+        {
+          "id": "from_location",
+          "type": "short_answer",
+          "question": "From (Airport Code)",
+          "required": true,
+          "placeholder": "e.g., KEFD"
+        },
+        {
+          "id": "to_location",
+          "type": "short_answer",
+          "question": "To (Airport Code)",
+          "required": true,
+          "placeholder": "e.g., KXNA"
+        },
+        {
+          "id": "takeoff_hobbs",
+          "type": "short_answer",
+          "question": "Takeoff (Hobbs)",
+          "required": true,
+          "validation": "number",
+          "placeholder": "e.g., 1740.2"
+        },
+        {
+          "id": "landing_hobbs",
+          "type": "short_answer",
+          "question": "Landing (Hobbs)",
+          "required": true,
+          "validation": "number",
+          "placeholder": "e.g., 1744.0"
+        },
+        {
+          "id": "total_hobbs",
+          "type": "short_answer",
+          "question": "Total (Hobbs)",
+          "required": true,
+          "validation": "number",
+          "placeholder": "Calculated: Landing - Takeoff"
+        },
+        {
+          "id": "forwarded_tach_time",
+          "type": "short_answer",
+          "question": "Forwarded Tach Time",
+          "required": true,
+          "validation": "number",
+          "placeholder": "e.g., 8450.4"
+        },
+        {
+          "id": "next_due_tach_time",
+          "type": "short_answer",
+          "question": "Next Due Tach Time",
+          "required": true,
+          "validation": "number",
+          "placeholder": "e.g., 8462.5"
+        },
+        {
+          "id": "hrs_remaining",
+          "type": "short_answer",
+          "question": "Hours Remaining",
+          "required": true,
+          "validation": "number",
+          "placeholder": "e.g., 12.1"
+        },
+        {
+          "id": "inspect_type",
+          "type": "dropdown",
+          "question": "Inspection Type",
+          "required": true,
+          "options": ["50", "100", "Annual"],
+          "note": "Options can be controlled via API"
+        }
+      ]
+    },
+    {
+      "title": "Daily Pre-Flight Inspection Checklist",
+      "description": "Check all items that have been inspected",
+      "fields": [
+        {
+          "id": "checklist_aircraft_cleanliness",
+          "type": "checkbox",
+          "question": "1. Aircraft Cleanliness",
+          "required": true
+        },
+        {
+          "id": "checklist_engine_oil_qty",
+          "type": "short_answer",
+          "question": "2. Engine Oil Level - Quantity",
+          "required": false,
+          "placeholder": "Enter quantity if applicable"
+        },
+        {
+          "id": "checklist_engine_oil",
+          "type": "checkbox",
+          "question": "2. Engine Oil Level (Single Engine or L & R)",
+          "required": true
+        },
+        {
+          "id": "checklist_flight_controls",
+          "type": "checkbox",
+          "question": "3. Flight Controls Free and Correct",
+          "required": true
+        },
+        {
+          "id": "checklist_engine_hoses",
+          "type": "checkbox",
+          "question": "4. Engine Hoses and Wires are Attached (as visible)",
+          "required": true
+        },
+        {
+          "id": "checklist_pitot_static",
+          "type": "checkbox",
+          "question": "5. Pitot/Static Ports Clear",
+          "required": true
+        },
+        {
+          "id": "checklist_tires_brakes",
+          "type": "checkbox",
+          "question": "6. Tires, Brakes and Linings in Proper Condition",
+          "required": true
+        },
+        {
+          "id": "checklist_prop_spinner",
+          "type": "checkbox",
+          "question": "7. Prop and Spinner Free of Damage/Dents",
+          "required": true
+        },
+        {
+          "id": "checklist_exhaust",
+          "type": "checkbox",
+          "question": "8. Exhaust Free of Blockage",
+          "required": true
+        },
+        {
+          "id": "checklist_airframe",
+          "type": "checkbox",
+          "question": "9. No Cracks or Damage on Airframe Structural Surface",
+          "required": true
+        },
+        {
+          "id": "checklist_antennae_lights",
+          "type": "checkbox",
+          "question": "10. Antennae Present and Lights Operational",
+          "required": true
+        },
+        {
+          "id": "checklist_cargo_door",
+          "type": "checkbox",
+          "question": "11. Cargo Door Locked",
+          "required": true
+        },
+        {
+          "id": "checklist_fuel_caps",
+          "type": "checkbox",
+          "question": "12. Fuel Caps Secured",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Fuel and Oil Information",
+      "fields": [
+        {
+          "id": "refuel_caps_secured",
+          "type": "checkbox",
+          "question": "Refuel: Fuel Caps Secured?",
+          "required": true
+        },
+        {
+          "id": "oil_added_a",
+          "type": "short_answer",
+          "question": "Oil Added (Qts.) - A",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "oil_added_b",
+          "type": "short_answer",
+          "question": "Oil Added (Qts.) - B",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "oil_added_c",
+          "type": "short_answer",
+          "question": "Oil Added (Qts.) - C",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "fuel_onboard",
+          "type": "short_answer",
+          "question": "Fuel Onboard (Gal.)",
+          "required": true,
+          "validation": "number"
+        },
+        {
+          "id": "fuel_required",
+          "type": "short_answer",
+          "question": "Fuel Required (Gal.)",
+          "required": true,
+          "validation": "number"
+        },
+        {
+          "id": "fuel_reserve",
+          "type": "short_answer",
+          "question": "Fuel Reserve (Gal.)",
+          "required": true,
+          "validation": "number"
+        },
+        {
+          "id": "fuel_uplift",
+          "type": "short_answer",
+          "question": "Fuel Uplift (Gal.)",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "calc_fuel_burn",
+          "type": "short_answer",
+          "question": "Calc. Fuel Burn (Gal./Hr.)",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "daily_total",
+          "type": "short_answer",
+          "question": "Daily Total",
+          "required": false,
+          "validation": "number"
+        }
+      ]
+    },
+    {
+      "title": "Engine Monitoring",
+      "fields": [
+        {
+          "id": "mag_drop_1_left",
+          "type": "short_answer",
+          "question": "Mag Drop - #1 Engine - Left",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "mag_drop_1_right",
+          "type": "short_answer",
+          "question": "Mag Drop - #1 Engine - Right",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "mag_drop_2_left",
+          "type": "short_answer",
+          "question": "Mag Drop - #2 Engine - Left",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "mag_drop_2_right",
+          "type": "short_answer",
+          "question": "Mag Drop - #2 Engine - Right",
+          "required": false,
+          "validation": "number"
+        },
+        {
+          "id": "oat",
+          "type": "short_answer",
+          "question": "OAT (Outside Air Temperature)",
+          "required": false,
+          "placeholder": "e.g., 6°F"
+        },
+        {
+          "id": "to_rpm_max_observ",
+          "type": "short_answer",
+          "question": "T-O RPM/Max. Observ. RPM",
+          "required": false,
+          "validation": "number",
+          "placeholder": "e.g., 2500"
+        },
+        {
+          "id": "mp",
+          "type": "short_answer",
+          "question": "MP (Manifold Pressure)",
+          "required": false,
+          "placeholder": "e.g., 22\""
+        },
+        {
+          "id": "oil_temp",
+          "type": "short_answer",
+          "question": "Oil Temp",
+          "required": false,
+          "placeholder": "e.g., GREEN"
+        },
+        {
+          "id": "oil_pressure",
+          "type": "short_answer",
+          "question": "Oil Pressure",
+          "required": false,
+          "placeholder": "e.g., GREEN"
+        }
+      ]
+    },
+    {
+      "title": "Daily Post Flight Discrepancy Log",
+      "description": "PILOT SQUAWK/DEFECT REPORTING - Review Squawk/Deferred Defect List before reporting a defect. If no defects, enter 'NONE.' Sign & Date. Any Squawks/Defects noted must be transferred to the Squawk/Deferred Discrepancy Log and reference the tech log number.",
+      "fields": [
+        {
+          "id": "squawk_1",
+          "type": "paragraph",
+          "question": "1) Squawk/Defect",
+          "required": false
+        },
+        {
+          "id": "squawk_2",
+          "type": "paragraph",
+          "question": "2) Squawk/Defect",
+          "required": false
+        },
+        {
+          "id": "squawk_3",
+          "type": "paragraph",
+          "question": "3) Squawk/Defect",
+          "required": false
+        }
+      ]
+    },
+    {
+      "title": "Daily Post Flight Inspection Certification",
+      "description": "I certify that the above daily inspection has been carried out in accordance with company maintenance procedures.",
+      "fields": [
+        {
+          "id": "post_inspection_date",
+          "type": "date",
+          "question": "Date",
+          "required": true
+        },
+        {
+          "id": "post_inspection_pilot_cert",
+          "type": "short_answer",
+          "question": "Pilot Cert. Number",
+          "required": true
+        },
+        {
+          "id": "post_inspection_signature",
+          "type": "short_answer",
+          "question": "Signature (Full Name)",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Preflight/Departure Certificate",
+      "description": "I certify that the preflight inspection has been carried out in accordance with the aircraft operations handbook and I accept its current status.",
+      "fields": [
+        {
+          "id": "preflight_cert_date",
+          "type": "date",
+          "question": "Date",
+          "required": true
+        },
+        {
+          "id": "preflight_cert_pilot_cert",
+          "type": "short_answer",
+          "question": "Pilot Cert. Number",
+          "required": true
+        },
+        {
+          "id": "preflight_cert_signature",
+          "type": "short_answer",
+          "question": "Signature (Full Name)",
+          "required": true
+        },
+        {
+          "id": "end_flight_tach_time",
+          "type": "short_answer",
+          "question": "End of Flight Tach Time",
+          "required": true,
+          "validation": "number"
+        },
+        {
+          "id": "end_next_due_tach_time",
+          "type": "short_answer",
+          "question": "Next Due Tach Time",
+          "required": true,
+          "validation": "number"
+        },
+        {
+          "id": "end_hrs_remaining",
+          "type": "short_answer",
+          "question": "Hrs. Remaining",
+          "required": true,
+          "validation": "number"
+        },
+        {
+          "id": "end_inspect_type",
+          "type": "dropdown",
+          "question": "Inspect. Type",
+          "required": true,
+          "options": ["50", "100", "Annual"]
+        }
+      ]
+    },
+    {
+      "title": "Comments",
+      "fields": [
+        {
+          "id": "comments",
+          "type": "paragraph",
+          "question": "Additional Comments",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

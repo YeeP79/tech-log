@@ -1,0 +1,87 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =============================================================================
+    // Helper Functions
+    // =============================================================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user is an admin
+    function isAdmin() {
+      return isAuthenticated() &&
+             exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    // Check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Check if user can edit a submission
+    function canEditSubmission(submission) {
+      return (isOwner(submission.userId) &&
+              submission.canEdit &&
+              !submission.isLocked) ||
+             isAdmin();
+    }
+
+    // =============================================================================
+    // Collection Rules
+    // =============================================================================
+
+    // Tech Log Submissions
+    // Initially locked down - will be opened with authentication in Phase 1
+    match /tech_logs/{submissionId} {
+      allow read: if false;  // Locked until auth is implemented
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // Users Collection
+    // Initially locked down - will be opened with authentication in Phase 1
+    match /users/{uid} {
+      allow read: if false;  // Locked until auth is implemented
+      allow write: if false;
+    }
+
+    // Admins Collection
+    // Initially locked down - will be opened with authentication in Phase 1
+    match /admins/{email} {
+      allow read: if false;  // Locked until auth is implemented
+      allow write: if false;
+    }
+
+    // Edit Permissions Collection
+    // Initially locked down - will be opened with authentication in Phase 1
+    match /edit_permissions/{permissionId} {
+      allow read: if false;  // Locked until auth is implemented
+      allow write: if false;
+    }
+
+    // Locks Collection
+    // Initially locked down - will be opened with authentication in Phase 1
+    match /locks/{submissionId} {
+      allow read: if false;  // Locked until auth is implemented
+      allow write: if false;
+    }
+
+    // System Configuration
+    // Initially locked down - will be opened with authentication in Phase 1
+    match /system_config/{docId} {
+      allow read: if false;  // Locked until auth is implemented
+      allow write: if false;
+    }
+
+    // Default: Deny all access to any other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
